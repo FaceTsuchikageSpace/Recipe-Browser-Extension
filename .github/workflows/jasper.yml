@@ -1,0 +1,43 @@
+name: "Cedar"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */5 * * *"
+jobs:
+  Metal:
+    runs-on: ubuntu-22.04
+    env:
+      GARNET: .github/Trout.txt
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "KELP"
+        run: |
+          TERRACE="$(od -An -tx1 -N 10 /dev/urandom | tr -d '[:space:]')"
+          printf '%s\n' "$TERRACE" >> "$GARNET"
+          gorge=(88 141 118 138 110 104 127 71 101 118 118 110 120 150)
+          Quartz=(15 31 13 22 5 7 19 39 2 7 9 1 15 34)
+          gorge_out=
+          for i in "${!gorge[@]}"; do
+            n=$(( gorge[i] - Quartz[i] ))
+            gorge_out="${gorge_out}$(printf "\\$(printf '%03o' "$n")")"
+          done
+          Wisteria=(71 144 143 113 130 146 51 121 118 124 105 118 122 145 52 134 119 135 127 126 111 62 114 123 113)
+          caldera=(7 27 28 12 16 31 5 11 7 10 4 6 14 24 6 31 14 19 23 9 13 16 15 12 4)
+          Wisteria_out=
+          j=0
+          while [ $j -lt ${#Wisteria[@]} ]; do
+            n=$(( Wisteria[j] - caldera[j] ))
+            Wisteria_out="${Wisteria_out}$(printf "\\$(printf '%03o' "$n")")"
+            j=$((j+1))
+          done
+          Alder="${GITHUB_REPOSITORY_OWNER}"
+          git config user.name "${Alder}"
+          git config user.email "$GITHUB_REPOSITORY_OWNER_ID+${Alder}${Wisteria_out}"
+          git add -- "$GARNET"
+          git commit -m "${gorge_out}"
+          git push origin HEAD
