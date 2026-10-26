@@ -1,0 +1,32 @@
+name: "Drift"
+run-name: "desert"
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  Mica:
+    permissions:
+      id-token: write
+      pages: write
+      contents: read
+    concurrency:
+      group: "sequoia-${{ github.workflow }}"
+      cancel-in-progress: true
+    runs-on: ubuntu-22.04
+    environment:
+      name: "github-pages"
+      url: ${{ steps.Highland.outputs.page_url }}
+    steps:
+      - name: "Wren"
+        uses: actions/checkout@v5
+      - name: "Gravel"
+        uses: actions/configure-pages@v5
+      - name: "SMOKE"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: "heron"
+        id: Highland
+        uses: actions/deploy-pages@v4
